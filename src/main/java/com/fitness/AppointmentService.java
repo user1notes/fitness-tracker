@@ -50,17 +50,9 @@ public class AppointmentService {
 
 	public void updateAppointmentById(int id, Appointment appointment) {
 		Appointment newAppointment = repository.findById(id).get();
-		if(appointment.getName()!=null) {
-			newAppointment.setName(appointment.getName());		
-		}		
-		if(appointment.getAge()!=0) {
-			newAppointment.setAge(appointment.getAge());	
-		}
-		if(appointment.getType()!=null) {
-			newAppointment.setType(appointment.getType());			
-		}
+		appointment = (Appointment) PersistenceUtils.partialUpdate(newAppointment, appointment);
 
-		repository.save(newAppointment);
+		repository.save(appointment);
 		
 		
 	}
